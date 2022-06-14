@@ -129,7 +129,7 @@ export const filterData = [
             { name: 'Residential Floor', value: '12' },
             { name: 'Residential Building', value: '17' },
         ],
-        placeholder: 'Property Type',
+        placeholder: 'property Type',
         queryName: 'categoryExternalID',
     },
 ];

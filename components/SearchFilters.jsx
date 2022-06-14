@@ -3,8 +3,9 @@ import {Flex, Select, Box, Text, Input, Spinner, Icon, Button} from "@chakra-ui/
 import {useRouter} from 'next/router';
 import {MdCancel} from 'react-icons/md';
 import Image from "next/image";
-import {filterData, getFilterValues} from "../../utils/filterData";
-import {baseUrl, fetchApi} from "../../utils/fetchAPI";
+import {filterData, getFilterValues} from "../utils/filterData";
+import {baseUrl, fetchApi} from "../utils/fetchAPI";
+import noresult from '../assets/images/noresult.svg';
 
 export default function SearchFilters() {
     const [filters] = useState(filterData);
@@ -16,17 +17,17 @@ export default function SearchFilters() {
 
     const searchProperties = (filterValues) => {
         const path = router.pathname;
-        const {query} = router;
+        const { query } = router;
 
         const values = getFilterValues(filterValues)
 
         values.forEach((item) => {
-            if (item.value && filterValues?.[item.name]) {
+            if(item.value && filterValues?.[item.name]) {
                 query[item.name] = item.value
             }
         })
 
-        router.push({pathname: path, query: query});
+        router.push({ pathname: path, query: query });
     };
 
     useEffect(() => {
@@ -46,8 +47,7 @@ export default function SearchFilters() {
         <Flex bg='gray.100' p='4' justifyContent='center' flexWrap='wrap'>
             {filters?.map((filter) => (
                 <Box key={filter.queryName}>
-                    <Select onChange={(e) => searchProperties({[filter.queryName]: e.target.value})}
-                            placeholder={filter.placeholder} w='fit-content' p='2'>
+                    <Select onChange={(e) => searchProperties({ [filter.queryName]: e.target.value })} placeholder={filter.placeholder} w='fit-content' p='2' >
                         {filter?.items?.map((item) => (
                             <option value={item.value} key={item.value}>
                                 {item.name}
@@ -57,8 +57,7 @@ export default function SearchFilters() {
                 </Box>
             ))}
             <Flex flexDir='column'>
-                <Button onClick={() => setShowLocations(!showLocations)} border='1px' borderColor='gray.200'
-                        marginTop='2'>
+                <Button onClick={() => setShowLocations(!showLocations)} border='1px' borderColor='gray.200' marginTop='2' >
                     Search Location
                 </Button>
                 {showLocations && (
@@ -81,28 +80,26 @@ export default function SearchFilters() {
                                 onClick={() => setSearchTerm('')}
                             />
                         )}
-                        {loading && <Spinner margin='auto' marginTop='3'/>}
+                        {loading && <Spinner margin='auto' marginTop='3' />}
                         {showLocations && (
                             <Box height='300px' overflow='auto'>
                                 {locationData?.map((location) => (
                                     <Box
                                         key={location.id}
                                         onClick={() => {
-                                            searchProperties({locationExternalIDs: location.externalID});
+                                            searchProperties({ locationExternalIDs: location.externalID });
                                             setShowLocations(false);
                                             setSearchTerm(location.name);
                                         }}
                                     >
-                                        <Text cursor='pointer' bg='gray.200' p='2' borderBottom='1px'
-                                              borderColor='gray.100'>
+                                        <Text cursor='pointer' bg='gray.200' p='2' borderBottom='1px' borderColor='gray.100' >
                                             {location.name}
                                         </Text>
                                     </Box>
                                 ))}
                                 {!loading && !locationData?.length && (
-                                    <Flex justifyContent='center' alignItems='center' flexDir='column' marginTop='5'
-                                          marginBottom='5'>
-                                        <Image src={noresult}/>
+                                    <Flex justifyContent='center' alignItems='center' flexDir='column' marginTop='5' marginBottom='5' >
+                                        <Image src={noresult} />
                                         <Text fontSize='xl' marginTop='3'>
                                             Waiting to search!
                                         </Text>

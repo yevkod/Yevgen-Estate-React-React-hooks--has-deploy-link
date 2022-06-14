@@ -4,7 +4,7 @@ import Navbar from "./Navbar";
 import Footer from "./Footer";
 
 
-export default function Layout({children}) {
+export default function Layout({ children }) {
     return (
         <>
             <Head>
@@ -12,12 +12,12 @@ export default function Layout({children}) {
             </Head>
             <Box maxWidth='1280px' m='auto'>
                 <header>
-                    <Navbar/>
-                    <main>{children}</main>
-                    <footer>
-                        <Footer />
-                    </footer>
+                    <Navbar />
                 </header>
+                <main>{children}</main>
+                <footer>
+                    <Footer />
+                </footer>
             </Box>
         </>
     );
