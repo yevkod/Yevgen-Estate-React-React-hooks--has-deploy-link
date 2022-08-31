@@ -15,7 +15,7 @@ const Navbar = () => (
                 <MenuButton as={IconButton} icon={<FcMenu />} variant='outline' color='red.400' />
                 <MenuList>
                     <Link href='/' passHref>
-                        <MenuItem icon={<FcHome />}>Home</MenuItem>
+                        <MenuItem icon={<FcHome />}>Home2</MenuItem>
                     </Link>
                     <Link href='/search' passHref>
                         <MenuItem icon={<BsSearch />}>Search</MenuItem>
